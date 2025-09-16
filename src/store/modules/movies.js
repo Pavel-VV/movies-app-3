@@ -27,6 +27,7 @@ const moviesStore = {
         top250IDs.slice(from, to),
     currentPage: ({ currentPage }) => currentPage,
     moviesPerPage: ({ moviesPerPage }) => moviesPerPage,
+    moviesList: ({ movies }) => movies,
   },
   mutations: {
     [MOVIES](state, value) {
@@ -34,6 +35,12 @@ const moviesStore = {
     },
   },
   actions: {
+    initMovies: {
+      handler({ dispatch }) {
+        dispatch("fetchMovies");
+      },
+      root: true,
+    },
     async fetchMovies({ getters, commit }) {
       try {
         const { slicedIDs, moviesPerPage, currentPage } = getters;
