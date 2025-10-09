@@ -2,17 +2,19 @@
   <div id="app">
     <FonBg :posterBg="movieBg" />
     <MoviesList :list="moviesList" @onGetMovieBg="getBgFon" />
+    <MoviesPagination />
   </div>
 </template>
 
 <script>
 import MoviesList from "@/components/MoviesList";
 import FonBg from "@/components/FonBg";
+import MoviesPagination from "@/components/MoviesPagination";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "App",
-  components: { MoviesList, FonBg },
+  components: { MoviesList, FonBg, MoviesPagination },
   data: () => ({
     movieBg: "",
   }),
