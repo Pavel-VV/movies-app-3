@@ -2,7 +2,11 @@
   <div id="app">
     <FonBg :posterBg="movieBg" />
     <MoviesList :list="moviesList" @onGetMovieBg="getBgFon" />
-    <MoviesPagination />
+    <MoviesPagination
+      :currPage="currentPage"
+      :perPage="moviesPerPage"
+      :total="totalMoviesLength"
+    />
   </div>
 </template>
 
@@ -19,7 +23,12 @@ export default {
     movieBg: "",
   }),
   computed: {
-    ...mapGetters("movies", ["moviesList"]),
+    ...mapGetters("movies", [
+      "moviesList",
+      "currentPage",
+      "moviesPerPage",
+      "totalMoviesLength",
+    ]),
   },
   methods: {
     ...mapActions("movies", ["fetchMovies"]),

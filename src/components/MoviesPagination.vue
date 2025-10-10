@@ -15,10 +15,32 @@
 export default {
   name: "MoviesPagination",
   data: () => ({
-    currentPage: 1,
-    perPage: 12,
-    total: 200,
+    currentPageData: 1,
   }),
+  props: {
+    currPage: {
+      type: Number,
+      default: 1,
+    },
+    perPage: {
+      type: Number,
+      default: 1,
+    },
+    total: {
+      type: Number,
+      default: 1,
+    },
+  },
+  computed: {
+    currentPage: {
+      get() {
+        return this.currPage;
+      },
+      set(value) {
+        this.currentPageData = value;
+      },
+    },
+  },
 };
 </script>
 
