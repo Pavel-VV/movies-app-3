@@ -38,6 +38,7 @@ export default {
       },
       set(value) {
         this.currentPageData = value;
+        this.$emit("changeCurrentPage", value);
       },
     },
   },

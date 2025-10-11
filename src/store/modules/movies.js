@@ -10,7 +10,7 @@ function serializeMovies(movies) {
   return newList;
 }
 
-const { MOVIES } = mutations;
+const { MOVIES, CURRENT_PAGE } = mutations;
 
 const moviesStore = {
   namespaced: true,
@@ -33,6 +33,9 @@ const moviesStore = {
   mutations: {
     [MOVIES](state, value) {
       state.movies = value;
+    },
+    [CURRENT_PAGE](state, value) {
+      state.currentPage = value;
     },
   },
   actions: {
@@ -63,6 +66,10 @@ const moviesStore = {
       } catch (err) {
         console.log(err);
       }
+    },
+    changeCurrentPage({ dispatch, commit }, page) {
+      commit(CURRENT_PAGE, page);
+      dispatch("fetchMovies");
     },
   },
 };

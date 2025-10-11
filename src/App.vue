@@ -6,6 +6,7 @@
       :currPage="currentPage"
       :perPage="moviesPerPage"
       :total="totalMoviesLength"
+      @changeCurrentPage="onChangeCurrentPage"
     />
   </div>
 </template>
@@ -31,9 +32,12 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions("movies", ["fetchMovies"]),
+    ...mapActions("movies", ["changeCurrentPage"]),
     getBgFon(bg) {
       this.movieBg = bg;
+    },
+    onChangeCurrentPage(value) {
+      this.changeCurrentPage(value);
     },
   },
 };
