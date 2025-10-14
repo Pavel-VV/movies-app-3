@@ -23,6 +23,13 @@ export default {
   data: () => ({
     movieBg: "",
   }),
+  watch: {
+    "$route.query": {
+      handler: "getQueryPage",
+      immediate: true,
+      deep: true,
+    },
+  },
   computed: {
     ...mapGetters("movies", [
       "moviesList",
@@ -33,11 +40,17 @@ export default {
   },
   methods: {
     ...mapActions("movies", ["changeCurrentPage"]),
+    getQueryPage({ page = 1 }) {
+      console.log(page);
+      this.changeCurrentPage(Number(page));
+    },
     getBgFon(bg) {
       this.movieBg = bg;
     },
     onChangeCurrentPage(value) {
-      this.changeCurrentPage(value);
+      this.$router.push({ query: { page: value } });
+      // console.log(this.$route);
+      // this.changeCurrentPage(value);
     },
   },
 };
