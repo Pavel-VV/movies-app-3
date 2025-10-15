@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <MoviesLoader />
     <FonBg :posterBg="movieBg" />
     <MoviesList :list="moviesList" @onGetMovieBg="getBgFon" />
     <MoviesPagination
@@ -15,11 +16,12 @@
 import MoviesList from "@/components/MoviesList";
 import FonBg from "@/components/FonBg";
 import MoviesPagination from "@/components/MoviesPagination";
+import MoviesLoader from "@/components/MoviesLoader";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "App",
-  components: { MoviesList, FonBg, MoviesPagination },
+  components: { MoviesList, FonBg, MoviesPagination, MoviesLoader },
   data: () => ({
     movieBg: "",
   }),

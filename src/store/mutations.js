@@ -1,4 +1,5 @@
 export default {
   MOVIES: "MOVIES",
   CURRENT_PAGE: "CURRENT_PAGE",
+  CHANGE_LOADER: "CHANGE_LOADER",
 };

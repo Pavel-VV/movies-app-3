@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import movies from "./modules/movies";
+import moviesLoader from "./modules/moviesLoader";
 
 Vue.use(Vuex);
 
@@ -11,6 +12,7 @@ const store = new Vuex.Store({
   actions: {},
   modules: {
     movies,
+    moviesLoader,
   },
 });
 
