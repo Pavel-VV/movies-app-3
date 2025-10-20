@@ -10,7 +10,9 @@ const loader = {
     getStateLoader: ({ stateLoader }) => stateLoader,
   },
   mutations: {
-    [CHANGE_LOADER]: (state, bool) => (state.stateLoader = bool), //проверить написание mutation двоеточие стрелкой или как функция
+    [CHANGE_LOADER](state, bool) {
+      state.stateLoader = bool;
+    },
   },
   actions: {
     changeStateLoader({ commit }, value) {

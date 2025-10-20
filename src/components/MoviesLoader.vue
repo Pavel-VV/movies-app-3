@@ -1,5 +1,7 @@
 <template>
-  <div v-if="getStateLoader" class="movies-loader">Loader</div>
+  <div v-if="getStateLoader" class="movies-loader">
+    <BSpinner type="grow" variant="light" label="Loading..."></BSpinner>
+  </div>
 </template>
 
 <script>
@@ -16,6 +18,9 @@ export default {
 <style scoped>
 .movies-loader {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* top: 0;
   right: 0;
   bottom: 0;
