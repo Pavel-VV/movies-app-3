@@ -7,6 +7,7 @@
           <MovieItem
             :movie="movie"
             @mouseover.native="getMovieBg(movie.Poster)"
+            @onEventDeleteMovie="deleteMovie"
           />
         </BCol>
       </template>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import MovieItem from "@/components/MovieItem";
 export default {
   name: "MoviesList",
@@ -34,8 +36,13 @@ export default {
     },
   },
   methods: {
+    ...mapActions("movies", ["deleteMovieId"]),
     getMovieBg(bgUrl) {
       this.$emit("onGetMovieBg", bgUrl);
+    },
+    deleteMovie({ id, title }) {
+      this.deleteMovieId(id);
+      console.log(id, title); //3.54
     },
   },
 };

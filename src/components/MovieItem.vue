@@ -8,7 +8,10 @@
       </div>
       <div class="control-panel">
         <BButton class="control-btn mr-2" variant="outline-light">Edit</BButton>
-        <BButton class="control-btn ml-2" variant="outline-light"
+        <BButton
+          class="control-btn ml-2"
+          variant="outline-light"
+          @click="eventDeleteMovies"
           >Delete</BButton
         >
       </div>
@@ -30,6 +33,14 @@ export default {
       return {
         "background-image": `url( ${this.movie.Poster} )`,
       };
+    },
+  },
+  methods: {
+    eventDeleteMovies() {
+      this.$emit("onEventDeleteMovie", {
+        id: this.movie.imdbID,
+        title: this.movie.Title,
+      });
     },
   },
 };
