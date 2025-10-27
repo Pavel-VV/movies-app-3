@@ -80,9 +80,10 @@ const moviesStore = {
     deleteMovieId({ state, dispatch, commit }, id) {
       const movieIndex = state.top250IDs.indexOf(id);
       // const movieIndex = state.top250IDs.findIndex((value) => value === id);
-      console.log(movieIndex);
-      commit(DELETE_MOVIE, movieIndex);
-      dispatch("fetchMovies");
+      if (movieIndex !== -1) {
+        commit(DELETE_MOVIE, movieIndex);
+        dispatch("fetchMovies");
+      }
     },
   },
 };

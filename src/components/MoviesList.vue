@@ -40,8 +40,17 @@ export default {
     getMovieBg(bgUrl) {
       this.$emit("onGetMovieBg", bgUrl);
     },
-    deleteMovie({ id, title }) {
-      this.deleteMovieId(id);
+    async deleteMovie({ id, title }) {
+      const isConfirm = await this.$bvModal.msgBoxConfirm(
+        `Are you sure delete "${title}"?`
+      );
+      if (isConfirm) {
+        this.deleteMovieId(id);
+      }
+      // .then((value) => {
+      //   if (value) this.deleteMovieId(id);
+      // });
+      // this.deleteMovieId(id);
       console.log(id, title); //3.54
     },
   },
