@@ -2,6 +2,7 @@
   <div id="app">
     <MoviesLoader />
     <FonBg :posterBg="movieBg" />
+    <MoviesHeader />
     <MoviesList :list="moviesList" @onGetMovieBg="getBgFon" />
     <MoviesPagination
       :currPage="currentPage"
@@ -17,11 +18,18 @@ import MoviesList from "@/components/MoviesList";
 import FonBg from "@/components/FonBg";
 import MoviesPagination from "@/components/MoviesPagination";
 import MoviesLoader from "@/components/MoviesLoader";
+import MoviesHeader from "@/components/MoviesHeader";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "App",
-  components: { MoviesList, FonBg, MoviesPagination, MoviesLoader },
+  components: {
+    MoviesList,
+    FonBg,
+    MoviesPagination,
+    MoviesLoader,
+    MoviesHeader,
+  },
   data: () => ({
     movieBg: "",
   }),
