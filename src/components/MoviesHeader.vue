@@ -4,7 +4,12 @@
       <BContainer>
         <BNavbarBrand href="#">MovieDB</BNavbarBrand>
         <BNavForm>
-          <BFormInput class="mr-sm-2 search" placeholder="Search"></BFormInput>
+          <BFormInput
+            class="mr-sm-2 search"
+            placeholder="Search"
+            v-model="searchMovies"
+            debounce="500"
+          ></BFormInput>
         </BNavForm>
       </BContainer>
     </BNavbar>
@@ -12,8 +17,22 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "MoviesHeader",
+  data: () => ({
+    searchMovies: "",
+  }),
+  watch: {
+    searchMovies: "getDataInput",
+  },
+  methods: {
+    ...mapActions("movies", ["getSearchMovies"]),
+    getDataInput(inputData) {
+      console.log(inputData);
+      this.getSearchMovies(inputData);
+    },
+  },
 };
 </script>
 

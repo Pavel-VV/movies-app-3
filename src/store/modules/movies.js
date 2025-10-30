@@ -65,7 +65,7 @@ const moviesStore = {
         // });
         const response = await Promise.all(requests);
         const movies = serializeMovies(response);
-        console.log(movies);
+        // console.log(movies);
         commit(MOVIES, movies);
       } catch (err) {
         console.log(err);
@@ -84,6 +84,12 @@ const moviesStore = {
         commit(DELETE_MOVIE, movieIndex);
         dispatch("fetchMovies");
       }
+    },
+    async getSearchMovies({ dispatch }, data) {
+      console.log(dispatch);
+      console.log(data);
+      const searchMovies = await axios.get(`/?s=${data}`);
+      console.log(searchMovies.Search);
     },
   },
 };
