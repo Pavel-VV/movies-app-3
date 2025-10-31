@@ -10,12 +10,21 @@ function serializeMovies(movies) {
   return newList;
 }
 
-const { MOVIES, CURRENT_PAGE, DELETE_MOVIE } = mutations;
+function serializeMoviesToIDs(movies) {
+  const arrIDs = movies.reduce((acc, movie) => {
+    acc.push(movie.imdbID);
+    return acc;
+  }, []);
+  return arrIDs;
+}
+
+const { MOVIES, CURRENT_PAGE, DELETE_MOVIE, CHANGE_IDS } = mutations;
 
 const moviesStore = {
   namespaced: true,
   state: {
     top250IDs: IDs,
+    // top250IDs: IDs, нужно создать еще одни 250ids чтоб при стирании поиска востанавливались 250ids а при поиске опять записывались searchIDs
     moviesPerPage: 12,
     currentPage: 1,
     movies: {},
@@ -39,6 +48,9 @@ const moviesStore = {
     },
     [DELETE_MOVIE](state, index) {
       state.top250IDs.splice(index, 1);
+    },
+    [CHANGE_IDS](state, ids) {
+      state.top250IDs = ids;
     },
   },
   actions: {
@@ -78,6 +90,7 @@ const moviesStore = {
       dispatch("fetchMovies");
     },
     deleteMovieId({ state, dispatch, commit }, id) {
+      console.log(id);
       const movieIndex = state.top250IDs.indexOf(id);
       // const movieIndex = state.top250IDs.findIndex((value) => value === id);
       if (movieIndex !== -1) {
@@ -85,11 +98,28 @@ const moviesStore = {
         dispatch("fetchMovies");
       }
     },
-    async getSearchMovies({ dispatch }, data) {
-      console.log(dispatch);
-      console.log(data);
-      const searchMovies = await axios.get(`/?s=${data}`);
-      console.log(searchMovies.Search);
+    async getSearchMovies({ dispatch, commit }, data) {
+      try {
+        dispatch("changeStateLoader", true, { root: true });
+        console.log(dispatch);
+        console.log(data);
+        const searchMovies = await axios.get(`/?s=${data}`);
+        console.log(searchMovies);
+        if (searchMovies.Error) {
+          throw Error(searchMovies.Error);
+        }
+        const ids = serializeMoviesToIDs(searchMovies.Search);
+        console.log(ids);
+        commit(CHANGE_IDS, ids);
+        // нужно перезаписывать ids чтоб работала кнопка удаления 26.36
+        const moviesIDs = serializeMovies(searchMovies.Search);
+        console.log(moviesIDs);
+        commit(MOVIES, moviesIDs);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        dispatch("changeStateLoader", false, { root: true });
+      }
     },
   },
 };
