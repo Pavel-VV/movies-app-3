@@ -27,10 +27,16 @@ export default {
     searchMovies: "getDataInput",
   },
   methods: {
-    ...mapActions("movies", ["getSearchMovies"]),
+    ...mapActions("movies", ["getSearchMovies", "toggleSearch", "fetchMovies"]),
     getDataInput(inputData) {
-      console.log(inputData);
-      this.getSearchMovies(inputData);
+      console.log(`данные из input ${Boolean(inputData)}`);
+      if (inputData) {
+        this.getSearchMovies(inputData);
+        this.toggleSearch(true);
+      } else {
+        this.toggleSearch(false);
+        this.fetchMovies();
+      }
     },
   },
 };
