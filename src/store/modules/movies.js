@@ -47,6 +47,7 @@ const moviesStore = {
     moviesPerPage: ({ moviesPerPage }) => moviesPerPage,
     totalMoviesLength: ({ IDs }) => IDs.length,
     moviesList: ({ movies }) => movies,
+    searchState: ({ searchState }) => searchState,
   },
   mutations: {
     [MOVIES](state, value) {
