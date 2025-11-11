@@ -86,7 +86,7 @@ const moviesStore = {
         const from = currentPage * moviesPerPage - moviesPerPage;
         const to = currentPage * moviesPerPage;
         const moviesToFetch = slicedIDs(from, to);
-        console.log(moviesToFetch);
+        // console.log(moviesToFetch);
         const requests = moviesToFetch.map((id) => axios.get(`/?i=${id}`));
         console.log(requests);
         // const response = await axios.get("/", {
@@ -96,7 +96,7 @@ const moviesStore = {
         // });
         const response = await Promise.all(requests);
         const movies = serializeMovies(response);
-        // console.log(movies);
+        console.log(movies);
         commit(MOVIES, movies);
       } catch (err) {
         console.log(err);
@@ -115,6 +115,15 @@ const moviesStore = {
       if (movieIndex !== -1) {
         commit(DELETE_MOVIE, movieIndex);
         dispatch("fetchMovies");
+        dispatch(
+          "addToast",
+          {
+            msg: `delete movie ${state.movies[id].Title}`,
+            title: "Success",
+            variant: "success",
+          },
+          { root: true }
+        );
       }
     },
     async getSearchMovies({ dispatch, commit, state }, data) {

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <MoviesLoader />
+    <ShowToast />
     <FonBg :posterBg="movieBg" />
     <MoviesHeader />
     <MoviesList :list="moviesList" @onGetMovieBg="getBgFon" />
@@ -19,6 +20,7 @@ import FonBg from "@/components/FonBg";
 import MoviesPagination from "@/components/MoviesPagination";
 import MoviesLoader from "@/components/MoviesLoader";
 import MoviesHeader from "@/components/MoviesHeader";
+import ShowToast from "@/components/ShowToast";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -29,6 +31,7 @@ export default {
     MoviesPagination,
     MoviesLoader,
     MoviesHeader,
+    ShowToast,
   },
   data: () => ({
     movieBg: "",

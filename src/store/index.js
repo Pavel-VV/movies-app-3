@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import movies from "./modules/movies";
 import moviesLoader from "./modules/moviesLoader";
+import toast from "./modules/toasts";
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ const store = new Vuex.Store({
   modules: {
     movies,
     moviesLoader,
+    toast,
   },
 });
 

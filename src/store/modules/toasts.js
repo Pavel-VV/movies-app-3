@@ -8,6 +8,7 @@ const toasts = {
   },
   getters: {
     getLastToast: ({ toasts }) => toasts[toasts.length - 1],
+    // проверить правильность написанного
   },
   mutations: {
     [ADD_TOAST](state, toast) {
