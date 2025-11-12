@@ -31,6 +31,7 @@ export default {
     getDataInput(inputData) {
       console.log(`данные из input ${Boolean(inputData)}`);
       if (inputData) {
+        console.log("запрос на поиск");
         this.getSearchMovies(inputData);
         this.toggleSearch(true);
       } else {

@@ -80,6 +80,7 @@ const moviesStore = {
       try {
         dispatch("changeStateLoader", true, { root: true });
         if (!state.searchState && state.modified250IDs) {
+          console.log("ids перезаписались");
           commit(CHANGE_IDS, state.modified250IDs);
         }
         const { slicedIDs, moviesPerPage, currentPage } = getters;
@@ -88,7 +89,7 @@ const moviesStore = {
         const moviesToFetch = slicedIDs(from, to);
         // console.log(moviesToFetch);
         const requests = moviesToFetch.map((id) => axios.get(`/?i=${id}`));
-        console.log(requests);
+        // console.log(requests);
         // const response = await axios.get("/", {
         //   params: {
         //     i: "tt0111161",
@@ -129,20 +130,31 @@ const moviesStore = {
     async getSearchMovies({ dispatch, commit, state }, data) {
       try {
         dispatch("changeStateLoader", true, { root: true });
-        commit(SAVE_MDF250IDS, state.IDs);
-        console.log(`сохраненные измененные 250 ${state.modified250IDs}`);
+        if (state.IDs.length > 12) {
+          commit(SAVE_MDF250IDS, state.IDs);
+        }
+        // console.log(`сохраненные измененные 250 ${state.modified250IDs}`);
         const searchMovies = await axios.get(`/?s=${data}`);
         console.log(searchMovies);
         if (searchMovies.Error) {
           throw Error(searchMovies.Error);
         }
         const ids = serializeMoviesToIDs(searchMovies.Search);
-        console.log(ids);
+        // console.log(ids);
         commit(CHANGE_IDS, ids);
         // нужно перезаписывать ids чтоб работала кнопка удаления 26.36
         // реализовал при удалении поиска, восстанавливается модифицироанный IDs, теперь нужно реализовать измененение заголовка
         const moviesIDs = serializeMovies(searchMovies.Search);
-        console.log(moviesIDs);
+        dispatch(
+          "addToast",
+          {
+            msg: `Movies search success ${ids.length}`,
+            title: "Success",
+            variant: "success",
+          },
+          { root: true }
+        );
+        // console.log(moviesIDs);
         commit(MOVIES, moviesIDs);
       } catch (err) {
         console.log(err.message);

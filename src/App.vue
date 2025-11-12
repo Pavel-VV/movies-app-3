@@ -54,7 +54,7 @@ export default {
   methods: {
     ...mapActions("movies", ["changeCurrentPage"]),
     getQueryPage({ page = 1 }) {
-      console.log(page);
+      // console.log(page);
       this.changeCurrentPage(Number(page));
     },
     getBgFon(bg) {

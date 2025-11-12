@@ -13,9 +13,7 @@ export default {
     ...mapGetters(["getLastToast"]),
   },
   methods: {
-    showToast(toast) {
-      const { msg, title, variant } = toast;
-      console.log(`show toast ${msg} ${title} ${variant}`);
+    showToast({ msg, title, variant }) {
       this.$bvToast.toast(msg, {
         title: title,
         variant: variant,
