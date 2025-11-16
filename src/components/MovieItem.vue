@@ -28,11 +28,19 @@ export default {
       required: true,
     },
   },
+  data: () => ({
+    defaultBg: "linear-gradient(45deg, #270133, #940294)",
+  }),
   computed: {
     posterBackground() {
       return {
-        "background-image": `url( ${this.movie.Poster} )`,
+        "background-image": this.backgroundStyle,
       };
+    },
+    backgroundStyle() {
+      return this.movie.Poster === "N/A"
+        ? this.defaultBg
+        : `url( ${this.movie.Poster} )`;
     },
   },
   methods: {

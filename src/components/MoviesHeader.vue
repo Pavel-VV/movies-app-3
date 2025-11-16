@@ -29,9 +29,9 @@ export default {
   methods: {
     ...mapActions("movies", ["getSearchMovies", "toggleSearch", "fetchMovies"]),
     getDataInput(inputData) {
-      console.log(`данные из input ${Boolean(inputData)}`);
+      // console.log(`данные из input ${Boolean(inputData)}`);
       if (inputData) {
-        console.log("запрос на поиск");
+        // console.log("запрос на поиск");
         this.getSearchMovies(inputData);
         this.toggleSearch(true);
       } else {
