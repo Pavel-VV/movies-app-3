@@ -1,5 +1,5 @@
 <template>
-  <div class="info-modal"></div>
+  <div class="info-modal">MOVIE INFO2</div>
 </template>
 
 <script>

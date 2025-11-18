@@ -7,7 +7,12 @@
         <span class="movie-year">{{ movie.Year }}</span>
       </div>
       <div class="control-panel">
-        <BButton class="control-btn mr-2" variant="outline-light">Edit</BButton>
+        <BButton
+          class="control-btn mr-2"
+          variant="outline-light"
+          @click="eventMovieInfo"
+          >Info</BButton
+        >
         <BButton
           class="control-btn ml-2"
           variant="outline-light"
@@ -49,6 +54,9 @@ export default {
         id: this.movie.imdbID,
         title: this.movie.Title,
       });
+    },
+    eventMovieInfo() {
+      this.$emit("onEventMovieInfo", this.movie.imdbID);
     },
   },
 };

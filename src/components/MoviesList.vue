@@ -8,6 +8,7 @@
             :movie="movie"
             @mouseover.native="getMovieBg(movie.Poster)"
             @onEventDeleteMovie="deleteMovie"
+            @onEventMovieInfo="getMovieInfo"
           />
         </BCol>
       </template>
@@ -15,15 +16,19 @@
         <div>Empty List</div>
       </template>
     </BRow>
+    <BModal id="movie-modal-info" hide-footer hide-header size="lg">
+      <MovieInfoModal />
+    </BModal>
   </BContainer>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import MovieItem from "@/components/MovieItem";
+import MovieInfoModal from "@/components/MovieInfoModal";
 export default {
   name: "MoviesList",
-  components: { MovieItem },
+  components: { MovieItem, MovieInfoModal },
   props: {
     list: {
       type: Object,
@@ -56,6 +61,10 @@ export default {
       // });
       // this.deleteMovieId(id);
       console.log(id, title); //3.54
+    },
+    getMovieInfo(id) {
+      console.log(this.list[id]);
+      this.$bvModal.show("movie-modal-info");
     },
   },
 };
