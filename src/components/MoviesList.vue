@@ -16,8 +16,14 @@
         <div>Empty List</div>
       </template>
     </BRow>
-    <BModal id="movie-modal-info" hide-footer hide-header size="lg">
-      <MovieInfoModal />
+    <BModal
+      body-class="modal-info"
+      id="movie-modal-info"
+      hide-footer
+      hide-header
+      size="lg"
+    >
+      <MovieInfoModal :movie="movieInfo" @onEventCloseInfo="closeModalInfo" />
     </BModal>
   </BContainer>
 </template>
@@ -35,6 +41,9 @@ export default {
       default: () => ({}),
     },
   },
+  data: () => ({
+    movieInfoID: "null",
+  }),
   computed: {
     ...mapGetters("movies", ["searchState"]),
     isExist() {
@@ -42,6 +51,9 @@ export default {
     },
     moviesTitle() {
       return this.searchState ? "Search movies" : "IMDB top 250";
+    },
+    movieInfo() {
+      return this.movieInfoID ? this.list[this.movieInfoID] : "null";
     },
   },
   methods: {
@@ -63,8 +75,12 @@ export default {
       console.log(id, title); //3.54
     },
     getMovieInfo(id) {
-      console.log(this.list[id]);
+      this.movieInfoID = id;
       this.$bvModal.show("movie-modal-info");
+    },
+    closeModalInfo() {
+      this.movieInfoID = "null";
+      this.$bvModal.hide("movie-modal-info");
     },
   },
 };
@@ -75,5 +91,11 @@ export default {
   font-size: 50px;
   margin-bottom: 30px;
   color: #fff;
+}
+</style>
+
+<style>
+.modal-info {
+  padding: 0 !important;
 }
 </style>
