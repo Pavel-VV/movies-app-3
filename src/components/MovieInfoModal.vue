@@ -12,7 +12,18 @@
             <div class="movie-poster" :style="backgroundStyle"></div>
           </div>
         </BCol>
-        <BCol class="movie-info" sm="8"></BCol>
+        <BCol class="movie-info" sm="8">
+          <h3 class="movie-title">{{ movie.Title }}</h3>
+          <BFormRating readonly stars="10" v-model="movieRating" />
+          <!-- <BTable>
+            <BTbody>
+              <BTr>
+                <BTh>HI121</BTh>
+                <BTd>Hello212</BTd>
+              </BTr>
+            </BTbody>
+          </BTable> -->
+        </BCol>
       </BRow>
     </div>
   </div>
@@ -45,6 +56,9 @@ export default {
       return {
         "background-image": `${this.backgroundPoster}`,
       };
+    },
+    movieRating() {
+      return this.movie.imdbRating;
     },
   },
 };
@@ -89,5 +103,11 @@ export default {
   width: 100%;
   height: 100%;
   background-position: center center;
+}
+
+.movie-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
 }
 </style>
