@@ -14,7 +14,16 @@
         </BCol>
         <BCol class="movie-info" sm="8">
           <h3 class="movie-title">{{ movie.Title }}</h3>
-          <BFormRating readonly stars="10" v-model="movieRating" />
+          <BFormRating
+            class="rating-stars"
+            readonly
+            stars="10"
+            no-border
+            show-value
+            precision="1"
+            show-value-max
+            v-model="movieRating"
+          />
           <!-- <BTable>
             <BTbody>
               <BTr>
@@ -110,4 +119,28 @@ export default {
   font-weight: 300;
   line-height: 1.2;
 }
+
+.rating-stars {
+  padding: 0;
+}
+
+.rating-stars >>> .b-rating-star .b-rating-icon {
+  color: #ffdd00 !important;
+}
+
+.rating-stars >>> .b-rating-star,
+.rating-stars >>> .b-rating-value {
+  justify-content: flex-start;
+  flex-grow: 0 !important;
+  padding: 0;
+  font-weight: 300;
+}
+
+.rating-stars >>> :nth-child(n + 2) {
+  margin-left: 4px;
+}
+
+/* .rating-stars >>> .b-rating-star + .b-rating-star {
+  margin-left: 4px;
+} */
 </style>
