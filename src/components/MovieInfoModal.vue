@@ -16,14 +16,15 @@
           <h3 class="movie-title">{{ movie.Title }}</h3>
           <BFormRating
             class="rating-stars"
-            readonly
             stars="10"
             no-border
+            readonly
             show-value
             precision="1"
             show-value-max
             v-model="movieRating"
           />
+          <p class="movie-plot">{{ movie.Plot }}</p>
           <!-- <BTable>
             <BTbody>
               <BTr>
@@ -48,6 +49,7 @@ export default {
     },
   },
   data: () => ({
+    imdbRatingMod: null,
     defaultPoster: "linear-gradient(45deg, #270133, #940294)",
   }),
   methods: {
@@ -66,8 +68,14 @@ export default {
         "background-image": `${this.backgroundPoster}`,
       };
     },
-    movieRating() {
-      return this.movie.imdbRating;
+    movieRating: {
+      get() {
+        return this.imdbRatingMod || this.movie.imdbRating;
+      },
+      set(value) {
+        this.imdbRatingMod = value;
+        console.log(this.imdbRatingMod);
+      },
     },
   },
 };
@@ -124,6 +132,10 @@ export default {
   padding: 0;
 }
 
+.rating-stars:focus {
+  box-shadow: none;
+}
+
 .rating-stars >>> .b-rating-star .b-rating-icon {
   color: #ffdd00 !important;
 }
@@ -138,6 +150,10 @@ export default {
 
 .rating-stars >>> :nth-child(n + 2) {
   margin-left: 4px;
+}
+
+.movie-plot {
+  font-weight: 300;
 }
 
 /* .rating-stars >>> .b-rating-star + .b-rating-star {
