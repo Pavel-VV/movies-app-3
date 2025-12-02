@@ -25,6 +25,48 @@
             v-model="movieRating"
           />
           <p class="movie-plot">{{ movie.Plot }}</p>
+          <div class="badge-wrap">
+            <BBadge class="badge-style" variant="success">{{
+              movie.Year
+            }}</BBadge>
+            <BBadge class="badge-style" variant="success">{{
+              movie.Runtime
+            }}</BBadge>
+            <BBadge class="badge-style" variant="success">{{
+              movie.Gender
+            }}</BBadge>
+            <BBadge class="badge-style" variant="success">{{
+              movie.Language
+            }}</BBadge>
+          </div>
+          <table class="table small">
+            <tbody>
+              <tr>
+                <th>Production</th>
+                <td>{{ movie.Production }}</td>
+              </tr>
+              <tr>
+                <th>Actors</th>
+                <td>{{ movie.Actors }}</td>
+              </tr>
+              <tr>
+                <th>Awards</th>
+                <td>{{ movie.Awards }}</td>
+              </tr>
+              <tr>
+                <th>Country</th>
+                <td>{{ movie.Country }}</td>
+              </tr>
+              <tr>
+                <th>Director</th>
+                <td>{{ movie.Director }}</td>
+              </tr>
+              <tr>
+                <th>Writer</th>
+                <td>{{ movie.Writer }}</td>
+              </tr>
+            </tbody>
+          </table>
           <!-- <BTable>
             <BTbody>
               <BTr>
@@ -154,6 +196,15 @@ export default {
 
 .movie-plot {
   font-weight: 300;
+}
+
+.badge-wrap {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.badge-style {
+  margin-right: 5px;
 }
 
 /* .rating-stars >>> .b-rating-star + .b-rating-star {
